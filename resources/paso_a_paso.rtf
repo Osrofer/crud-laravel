@@ -165,7 +165,39 @@ Preparamos las acciones editar y borrar consultando el icoco que nos gusta de fo
         <a class="btn btn-raised btn-danger bt-sm" href=""><i class="far fa-trash-alt"></i></a>\par
       </td>\par
 --------------->Commit: iconos editar borrar\par
+
+\pard\sa200\sl276\slmult1 Para modificar creamos las rutas:\par
+Route::get('/edit/\{id\}','StudentController@edit' )->name('edit');\par
+Route::post('/update/\{id\}','StudentController@update' )->name('update');\par
+Creamos el controlador\par
+    public function edit($id)\{\par
+        $estudiante = Students::find($id);\par
+        return view ('edit',compact('estudiante'));\par
+    \}\par
+Creamos la pagina edit.blade.php (la copiamos de create) y modificamos el encabezado del form\par
+<form class="text-center border border-light p-5" action="\{\{route('update',$estudiante->id) \}\}" method="POST">\par
+Y ponemos la propiedad value a todos los campos....\par
 \par
+Por \'faltimo creamos el m\'e9todo update (copiando buena parte del store)\par
+\par
+   public function update (Request $request, $id)\{\par
+        $this->validate($request,[\par
+            'nombre' => 'required',\par
+            'email' => 'required',\par
+            'telefono' => 'required'\par
+        ]  );\par
+\par
+    $estudiante = Students::find($id);\par
+    $estudiante->nombre = $request->nombre;\par
+    $estudiante->apellidos = $request->apellidos;\par
+    $estudiante->email = $request->email;\par
+    $estudiante->telefono = $request->telefono;\par
+    $estudiante->save();\par
+    return redirect (route('home'))->with('successMsg','Estudiante modificado');\par
+    \}\par
+commit ===> alta, consulta y edici\'f3n\par
+
+\pard\sa200\sl240\slmult1\par
 
 \pard\sa200\sl276\slmult1\par
 \par
