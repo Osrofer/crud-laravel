@@ -209,6 +209,22 @@ Y crear el controlador \par
         return redirect (route ('home'))->with('successMsg', 'Estudiante borrado correctamente');\par
     \}\par
 commit --------> borrado simple\par
+Para hacer un borrado m\'e1s complejo (con confirmaci\'f3n y m\'e9todo http:delete) cambiamos la ruta\par
+\tab Route::delete('/delete/\{id\}', 'StudentController@delete') ->name('delete');\par
+Y en el welcome.blade.php, metemos c\'f3digo javascript\par
+\tab <form method="POST" id="delete-for" action="\{\{route('delete', $estudiante->id)\}\}" style="display: none;">\par
+            \{\{csrf_field()\}\}\par
+            \{\{method_field('delete')\}\}\par
+        </form>\par
+        <button onclick="if(confirm('\'bfEst\'e1s seguro de que quieres borrar?'))\{\par
+            document.getElementById('delete-for').submit();\par
+        \}else\{\par
+            event.preventDefault();\par
+        \}\par
+        "\par
+        a class="btn btn-raised btn-danger bt-sm" > <i class="far fa-trash-alt"></i>\par
+        </button>\par
+commit-------------->operaciones b\'e1sicas completadas\par
 \par
 }
  
