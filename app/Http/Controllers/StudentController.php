@@ -8,7 +8,9 @@ use App\Students;
 class StudentController extends Controller
 {
     public  function index(){
-        $estudiantes = Students::all();
+        //$estudiantes = Students::all();
+        //Para paginación
+        $estudiantes = Students::paginate(5);
         return view('welcome', compact('estudiantes'));
     }
     public function create(){

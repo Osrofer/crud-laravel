@@ -225,6 +225,11 @@ Y en el welcome.blade.php, metemos c\'f3digo javascript\par
         a class="btn btn-raised btn-danger bt-sm" > <i class="far fa-trash-alt"></i>\par
         </button>\par
 commit-------------->operaciones b\'e1sicas completadas\par
+Para paginaci\'f3n ponemos en el controlador el n\'famero de registros por p\'e1gina\par
+\tab $estudiantes = Students::paginate(5);\par
+Y en la vista welcome.blade.php donde queramos tener el control:\par
+\tab\{\{$estudiantes->links()\}\}\par
+commit------------>fin\par
 \par
 }
  
